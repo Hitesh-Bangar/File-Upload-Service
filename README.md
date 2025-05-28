@@ -31,13 +31,13 @@ cd file-upload-service
 cp .env.example .env      # edit if needed
 
 docker-compose up --build            # foreground  
-# or detach:
-# docker-compose up -d --build
+### or detach:
+docker-compose up -d --build
 
 
 npm install
 npm run dev            # launches src/server.js with nodemon
-# in another terminal:
+### in another terminal:
 npm run worker         # starts the BullMQ processor
 
 ## Demo Curls

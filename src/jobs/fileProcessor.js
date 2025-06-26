@@ -11,7 +11,7 @@ export default function registerFileProcessor() {
       logger.info('Processing file', fileId);
       await updateFileStatus(fileId, { status: 'processing' });
 
-      const hash = await sha256File(job.data.storage_path || job.data.filePath || job.data.path || ''); 
+      const hash = await sha256File(job.data.storage_path || job.data.filePath || job.data.path || '');
       await updateFileStatus(fileId, { status: 'processed', extracted_data: hash });
       return { hash };
     } catch (err) {

@@ -1,8 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/db.js';
+import { sequelize } from '../config/db.js';
 import File from './file.model.js';
 
-class Job extends Model {}
+class Job extends Model { }
 Job.init({
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   file_id: { type: DataTypes.INTEGER, allowNull: false },

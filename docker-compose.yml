@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   app:
     build: .
@@ -10,7 +11,50 @@ services:
       - .env
     depends_on:
       - redis
+      - postgres
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=file_upload
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    command: npm start
+
+  worker:
+    build: .
+    depends_on:
+      - redis
+      - postgres
+    env_file:
+      - .env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=file_upload
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    command: npm run worker
+
   redis:
-    image: redis:6-alpine
+    image: redis:7
     ports:
       - "6379:6379"
+
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: file_upload
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

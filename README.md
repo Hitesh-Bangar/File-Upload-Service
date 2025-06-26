@@ -40,6 +40,11 @@ npm run dev            # launches src/server.js with nodemon
 ### in another terminal:
 npm run worker         # starts the BullMQ processor
 
+docker-compose down
+
+docker exec -it postgres-1 psql -U postgres -d file_upload
+
+
 ## Demo Curls
 
 curl --location 'http://localhost:3000/login' \

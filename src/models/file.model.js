@@ -1,8 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/db.js';
+import { sequelize } from '../config/db.js';
 import User from './user.model.js';
 
-class File extends Model {}
+class File extends Model { }
 File.init({
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   user_id: { type: DataTypes.INTEGER, allowNull: false },

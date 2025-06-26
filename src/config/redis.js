@@ -1,4 +1,7 @@
-import { Redis } from 'ioredis';
-import dotenv from 'dotenv';
-dotenv.config();
-export const redis = new Redis(process.env.REDIS_URL);
+import IORedis from 'ioredis';
+
+export const redis = new IORedis({
+  host: process.env.REDIS_HOST || 'localhost', // <- change this if needed
+  port: 6379,
+  maxRetriesPerRequest: null, // 🔥 required to avoid deprecation warning
+});
